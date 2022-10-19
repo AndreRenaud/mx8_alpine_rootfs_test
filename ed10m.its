@@ -1,0 +1,57 @@
+/dts-v1/;
+/ {
+        description = "ED10M";
+        #address-cells = <1>;
+
+        images {
+                kernel {
+                        description = "Kernel";
+                        data = /incbin/("image_output/Image");
+                        type = "kernel";
+                        arch = "arm64";
+                        os = "linux";
+                        compression = "none";
+                        load = <0x40480000>;
+                        entry = <0x40480000>;
+                        hash {
+                                algo = "sha1";
+                        };
+                };
+                fdt {
+                        description = "DTB";
+                        data = /incbin/("image_output/imx8mp-verdin-wifi-dev.dtb");
+                        type = "flat_dt";
+                        arch = "arm64";
+                        compression = "none";
+                        load = <0x43000000>;
+                        entry = <0x43000000>;
+                        hash {
+                                algo = "sha1";
+                        };
+                };
+                initrd {
+                        description = "Initrd";
+                        data = /incbin/("initramfs");
+                        type = "ramdisk";
+                        arch = "arm64";
+                        os = "linux";
+                        compression = "none";
+                        hash {
+                                algo = "sha1";
+                        };
+                };
+        };
+
+        configurations {
+                default = "standard";
+                standard {
+                        description = "default";
+                        kernel = "kernel";
+                        fdt = "fdt";
+                        ramdisk = "initrd";
+                        hash {
+                                algo = "sha1";
+                        };
+                };
+        };
+};
