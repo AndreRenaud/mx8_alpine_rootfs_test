@@ -17,7 +17,11 @@ fi
 
 # Grab the rootfs + kernel files & combine into a single image
 mkdir -p image_output
+echo "Combining $KERNEL_DIR/$IMAGE, $KERNEL_DIR/$DTB and initramfs into image_output/ed10m.itb"
 cp "${KERNEL_DIR}/${IMAGE}" "${KERNEL_DIR}/${DTB}"  image_output/
 cp initramfs image_output/
 
 mkimage -q -f ed10m.its image_output/ed10m.itb
+
+echo "Final image"
+du -sh image_output/ed10m.itb
