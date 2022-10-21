@@ -29,6 +29,31 @@
                                 algo = "sha1";
                         };
                 };
+                fdt_evk {
+                        description = "DTB";
+                        data = /incbin/("from_evk/imx8mp-verdin-wifi-dev.dtb");
+                        type = "flat_dt";
+                        arch = "arm64";
+                        compression = "none";
+                        load = <0x43000000>;
+                        entry = <0x43000000>;
+                        hash {
+                                algo = "sha1";
+                        };
+                };
+                fdt_hdmi {
+                        description = "DTB";
+                        data = /incbin/("from_evk/verdin-imx8mp_lt8912_overlay.dtbo");
+                        //data = /incbin/("from_evk/verdin-imx8mp_native-hdmi_overlay.dtbo");
+                        type = "flat_dt";
+                        arch = "arm64";
+                        compression = "none";
+                        load = <0x43100000>;
+                        entry = <0x43100000>;
+                        hash {
+                                algo = "sha1";
+                        };
+                };                                
                 initrd {
                         description = "Initrd";
                         data = /incbin/("initramfs");
@@ -47,7 +72,8 @@
                 standard {
                         description = "default";
                         kernel = "kernel";
-                        fdt = "fdt";
+                        //fdt = "fdt";
+                        fdt = "fdt_evk", "fdt_hdmi";
                         ramdisk = "initrd";
                         hash {
                                 algo = "sha1";

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 BASE=$(dirname $(realpath $0))
 KERNEL_DIR=$(realpath ${BASE}/../linux-toradex)
@@ -22,6 +22,8 @@ cp "${KERNEL_DIR}/${IMAGE}" "${KERNEL_DIR}/${DTB}"  image_output/
 cp initramfs image_output/
 
 mkimage -q -f ed10m.its image_output/ed10m.itb
+
+mkimage -l image_output/ed10m.itb
 
 echo "Final image"
 du -sh image_output/ed10m.itb

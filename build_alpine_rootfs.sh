@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -e
 
 ROOT=alpine_root
 INITRAMFS=`pwd`/initramfs
